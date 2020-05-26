@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Flipkart Clone</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="/images/f-logo.png " />
+    <link rel="stylesheet" href="icons/css/all.css" />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <header>
+      <nav class="top-nav">
+        <div class="top-nav-container">
+          <div class="flex">
+            <div class="flipkart-logo">
+              <a href="#">
+                <img src="/images/f-logo.png" alt="logo">
+              </a>  
+            </div>
+            <div class="flex search-bar">
+              <input type="text" name="search" id="" placeholder="Search for products, brands and more">
+              <a href="">
+                <i class="fas fa-search"></i>
+              </a>
+            </div>  
+          </div>
+          <div class="top-nav-right">
+            <!-- <a class="flex" href="#">
+              <h5>My Account</h5>
+              <i class="fas fa-sort-down"></i>  
+            </a> -->
+            <a href="">
+              <button class="topnav-loginbtn">
+                <h5>Login</h5>
+              </button>
+            </a>
+            <a class="flex" href="#" >
+              <h5>More</h5>
+              <i class="fas fa-sort-down"></i>  
+            </a>
+            <a class="flex" href="#">
+              <i class="fas fa-shopping-cart"></i>
+              <h5>Cart</h5>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
   </body>
 </html>
