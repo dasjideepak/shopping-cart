@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <form action="/product/add" method="post">
+        <input type="text" name="name" placeholder="Enter Product Name">
+        <input type="file" name="images">
+        <input type="number" name="price" placeholder="Enter Price">
+        <textarea name="offers" cols="30" rows="10" placeholder="Enter Offers"></textarea>
+        <textarea name="highlight" cols="30" rows="10" placeholder="Enter Highlights"></textarea>
+        <input type="text" name="warranty" placeholder="Warranty">
+        <input type="submit" value="Add Product">
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+    <style>
+        img{
+            width: 180px;
+            height: 220px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h5>Name: <%= user.name%></h5>
+    <h5>Email: <%= user.email%></h5>
+    <h5>Avatar: <img src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
+    <a href="">Update Profile</a>
+    <a href="">Change Password</a>
+    <a href="">Delete Profile</a>
+</body>
+</html>

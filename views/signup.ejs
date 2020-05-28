@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="signup-section">
+        <div class="signup-form-container">
+            <div class="signup-left-sec">
+
+            </div>
+            <div class="signup-right-sec">
+                <form action="/users/signup" method="POST" enctype="multipart/form-data">
+                    <input type="text" name="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" placeholder="Enter Email" required>
+                    <input type="password" name="password" placeholder="Enter Password" required>
+                    <input type="file" name="avatar">
+                    <input type="submit" value="Sign Up">
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -55,6 +55,7 @@ table {
 
 .flex {
   display: flex;
+  justify-content: space-between;
 }
 
 a {
@@ -64,6 +65,10 @@ a {
 button {
   border: none;
   outline: none;
+}
+
+li {
+  list-style: none;
 }
 
 /******************** Header ********************/
@@ -82,8 +87,12 @@ button {
   font-size: 14px;
 }
 
+.top-nav h5 {
+  font-size: 16px;
+}
+
 .top-nav a:hover {
-  color: rgb(55, 255, 228); 
+  color: rgb(255, 238, 143); 
 }
 
 .top-nav-container {
@@ -114,7 +123,7 @@ button {
 .fa-search {
   position: absolute;
   top: 14px;
-  right: 4px;
+  right: 8px;
   color: black;
 }
 
@@ -123,22 +132,102 @@ button {
   align-items: center;
 }
 
-.topnav-loginbtn {
+.topnav-signupbtn {
   background-color: white;
-  margin-right: 20px;
-  color: #2874f0;
   border: 1px solid #dbdbdb;
-  padding: 4px 40px;
+  padding: 4px 12px;
+}
+
+.topnav-signupbtn:hover {
+  background-color: rgb(177, 177, 177);
+  border: 1px solid rgb(177, 177, 177);
+}
+
+.topnav-signupbtn i, .topnav-signupbtn h5 {
+  color: black;
+  padding: 0 4px;
+}
+
+.topnav-loginbtn {
+  display: flex;
+}
+
+.topnav-loginbtn h5 {
+  color: #ffffff;
 }
 
 .fa-sort-down {
-  padding: 0 12px 0 4px;
+  padding: 0 20px 0 4px;
 }
 
 .fa-shopping-cart {
   padding: 0 4px 0 12px;
 }
 
+.login-relative {
+  position: relative;
+}
+
+.login-dropdown {
+  display: none;
+  position: absolute;
+  top: 28px;
+  left: -16px;
+  border-radius: 4px;
+}
+
+.topnav-loginbtn:hover ~ .login-dropdown {
+  display: block;
+}
+
+.login-dropdown ul {
+  background-color: rgb(255, 255, 255);
+  width: 160px;
+}
+
+.login-dropdown ul li {
+  padding: 4px 12px;
+  border-bottom: 1px solid black;
+  height: 32px;
+}
+
+.login-dropdown ul li:last-child {
+  border-bottom: none;
+}
+
+.login-dropdown ul li:hover {
+  background-color: rgb(160, 158, 158);
+}
+
+.login-dropdown ul li a {
+  display: flex;
+  color: black;
+  font-size: 14px;
+}
+
+.login-dropdown ul li a i {
+  width: 16%;
+}
+
+.login-dropdown ul li a h5 {
+  width: 84%;
+}
+
+.more-btn {
+  display: flex;
+  margin-left: 20px;
+}
+
 /**************** Category Bar ***************/
 
 
+/* Sign Up Form */
+
+.signup-section {
+  background-color: chocolate;
+}
+
+.signup-form-container {
+  max-width: 999;
+  margin: 0 auto;
+}
