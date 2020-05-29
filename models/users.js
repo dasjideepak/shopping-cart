@@ -3,28 +3,12 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcryptjs');
 
 var userSchema = new Schema({
-    name:{
-        type: String,
-        required: true,
-    },
-    email:{
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-    },
-    avatar: {
-        type: String,
-    },
-    password: {
-        type: String,
-        minlength: 4,
-        maxlength: 15,
-    },
-    resetLink: {
-        data: String,
-        default: '',
-    }
+    name:{ type: String, required: true },
+    email:{ type: String, required: true, unique: true, trim: true },
+    avatar: { type: String },
+    password: { type: String, minlength: 4, maxlength: 15 },
+    shoppingCart: [],
+    resetLink: { data: String, default: '' }
 }, {timestamps: true});
 
 userSchema.pre("save", function(next) {
