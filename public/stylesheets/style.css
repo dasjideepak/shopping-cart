@@ -53,28 +53,37 @@ table {
   box-sizing: border-box;
 }
 
+.center {
+  text-align: center;
+}
+
 .flex {
   display: flex;
   justify-content: space-between;
+}
+
+:root {
+  --white: #fff;
+  --accent-color: #b5838d;
+  --dark-accent-color: #a6757f;
+  --main-color: #6d6875;
+  --dark-main-color: #56505f;
 }
 
 a {
   text-decoration: none;
 }
 
-button {
-  border: none;
-  outline: none;
-}
-
-li {
-  list-style: none;
+body {
+  background-color: #b8b5b5;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
 }
 
 /******************** Header ********************/
 
 .top-nav {
-  background: #2874f0;
+  background: #094e86;
   padding: 8px;
   color: white;
 }
@@ -114,8 +123,8 @@ li {
 .search-bar input {
   border: none;
   outline: none;
-  padding: 4px;
-  font-size: 12px;
+  padding: 4px 8px;
+  font-size: 14px;
   margin: 8px 0 8px 8px;
   width: 360px;
 }
@@ -133,101 +142,292 @@ li {
 }
 
 .topnav-signupbtn {
-  background-color: white;
-  border: 1px solid #dbdbdb;
-  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.8em;
+  background-color: #0768b8;
+  border-radius: 4px;
+  padding: 8px 20px;
+  margin-left: 16px;
 }
 
 .topnav-signupbtn:hover {
-  background-color: rgb(177, 177, 177);
-  border: 1px solid rgb(177, 177, 177);
+  background-color: rgb(32, 115, 148);
 }
 
 .topnav-signupbtn i, .topnav-signupbtn h5 {
-  color: black;
+  color: var(--white);
   padding: 0 4px;
-}
-
-.topnav-loginbtn {
-  display: flex;
-}
-
-.topnav-loginbtn h5 {
-  color: #ffffff;
-}
-
-.fa-sort-down {
-  padding: 0 20px 0 4px;
 }
 
 .fa-shopping-cart {
   padding: 0 4px 0 12px;
 }
 
-.login-relative {
-  position: relative;
-}
+/**************** Sign Up and Login Page ***************/
 
-.login-dropdown {
-  display: none;
-  position: absolute;
-  top: 28px;
-  left: -16px;
-  border-radius: 4px;
-}
-
-.topnav-loginbtn:hover ~ .login-dropdown {
+.wave {
   display: block;
+  animation: waving 3s infinite;
+  margin: 12px 0;
+  font-size: 28px;
 }
 
-.login-dropdown ul {
-  background-color: rgb(255, 255, 255);
-  width: 160px;
+@keyframes waving {
+  0% {
+      transform: rotate(30deg);
+  }
+  50% {
+      transform: rotate(-15deg);
+  }
+  100% {
+      transform: rotate( 30deg);
+  }
 }
 
-.login-dropdown ul li {
-  padding: 4px 12px;
-  border-bottom: 1px solid black;
-  height: 32px;
-}
-
-.login-dropdown ul li:last-child {
-  border-bottom: none;
-}
-
-.login-dropdown ul li:hover {
-  background-color: rgb(160, 158, 158);
-}
-
-.login-dropdown ul li a {
+.form-section {
   display: flex;
-  color: black;
-  font-size: 14px;
+  align-items: center;
+  justify-content: center;
 }
 
-.login-dropdown ul li a i {
-  width: 16%;
+.form-container button {
+  cursor: pointer;
+  font-size: 0.8em;
+  color: var(--white);
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 5px;
+  border-width: 0px;
+  text-transform: uppercase;
 }
 
-.login-dropdown ul li a h5 {
-  width: 84%;
+.form-heading {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 16px;
 }
 
-.more-btn {
+.form-container {
+  margin-top: 40px;
   display: flex;
-  margin-left: 20px;
+  flex-direction: column;
+  background-color: var(--white);
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border-top: 10px solid var(--accent-color);
 }
 
-/**************** Category Bar ***************/
-
-
-/* Sign Up Form */
-
-.signup-section {
-  background-color: chocolate;
+.form-container input {
+  width: 280px;
+  padding: 12px 12px;
+  border-radius: 0px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 95%);
+  margin: 8px 0;
 }
 
-.signup-form-container {
-  max-width: 999;
+.form-container1 input {
+  width: 600px;
+}
+
+textarea {
+  margin: 8px 0;
+  border: 0px;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 95%);
+  padding: 12px 12px;
+}
+
+.login {
+  background-color: var(--main-color);
+}
+
+.login:hover {
+  background-color: var(--dark-main-color);
+}
+
+.form-container a {
+  color: var(--main-color);
+  margin-top: 12px;
+  text-decoration: underline;
+}
+
+.form-container a:hover {
+  color: var(--dark-main-color);
+}
+
+.user-img {
+  width: 180px;
+  height: 220px;
+  border: 1px solid black;
+}
+
+.carousel {
+  display: flex;
+  max-width: 1480px;
+  margin: 8px auto;
+}
+
+.slider-img {
+  width: 50%;
+  padding: 0 16px;
+  height: 240px;
+}
+
+/* Individual Product */
+
+.product-container {
+  max-width: 1480px;
   margin: 0 auto;
+  background-color: white;
+  width: 100%;
+  display: flex;
 }
+
+.left-side-sec {
+  display: flex;
+  border: 1px solid rgb(224, 222, 222);
+}
+
+.img-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img-nav img {
+  width: 80px;
+  height: 80px;
+  padding: 18px;
+}
+
+.img-nav img:hover {
+  border: 2px solid rgb(31, 11, 211);
+}
+
+.show-img {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-img {
+  border: 1px solid rgb(235, 231, 231);
+  padding: 20px 40px;
+}
+
+.product-btn {
+  display: flex;
+  margin: 12px 0;
+  width: 100%;
+}
+
+.addto-cart-btn, .buy-now-btn, .shop-now-btn {
+  background-color: #ff9f00;
+  padding: 12px 18px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 50%;
+  margin: 0 2px;
+}
+
+.buy-now-btn {
+  background: #fb641b;
+}
+
+.show-img .fa-shopping-cart, .fa-store{
+  padding: 0 12px 0 4px;
+}
+
+.right-side-sec {
+  width: 50%;
+  padding: 16px 32px;
+}
+
+.offers {
+  line-height: 1.5;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.product-title {
+  font-size: 24px;
+  padding: 12px 0;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.offers .bold {
+  padding: 16px 0 4px 0;
+}
+
+.offers li {
+  padding-left: 16px;
+}
+
+.warranty {
+  margin: 12px 0 12px 0;
+}
+
+.fa-tag {
+  color: rgb(1, 158, 1);
+}
+
+/* Cart */
+
+.cart-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  background-color: white;
+}  
+
+.empty-cart img {
+  width: 280px;
+  padding: 40px 0 0 0;
+}
+
+.shop-now-btn {
+  background: #094e86;
+  padding: 8px 32px;
+  width: 160px;
+  text-transform: capitalize;
+  font-size: 14px;
+  margin: 40px 0;
+}
+
+.my-cart-title {
+  font-size: 18px;
+  padding: 16px;
+  color: black;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+}
+
+.empty-cart h3 {
+  font-size: 18px;
+}
+
+.empty-cart h5 {
+  font-size: 14px;
+  padding-top: 12px;
+}
+
+.empty-cart a {
+  color: white;
+}
+
+.shop-now-btn:hover {
+  background-color: #2e09d4;
+}  

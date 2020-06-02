@@ -5,6 +5,7 @@ var bcrypt = require('bcryptjs');
 var userSchema = new Schema({
     name:{ type: String, required: true },
     email:{ type: String, required: true, unique: true, trim: true },
+    mobile:{ type: Number, required: true },
     avatar: { type: String },
     password: { type: String, minlength: 4, maxlength: 15 },
     shoppingCart: [],

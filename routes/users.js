@@ -3,6 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 var cloudinary = require('cloudinary');
 var upload = require('../handlers/multer');
+var messagebird = require('messagebird')('');
 
 // Require User Model
 var User = require("../models/users");
@@ -19,18 +20,11 @@ const signToken = id => {
 // POST Sign Up Page
 router.post("/signup", upload.single('avatar'), async (req, res, next) => {
   try {
-    const result = await cloudinary.v2.uploader.upload(req.file.path)
+    const result = await cloudinary.v2.uploader.upload(req.file.path);
     req.body.avatar = result.url;
     const newUser = await User.create(req.body);
     const token = signToken(newUser._id);
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        user: newUser
-      }
-    })
-    // res.status(201).render('login');
+    res.status(201).render('login');
   } catch (error) {
     next(error)
   }
@@ -59,22 +53,22 @@ router.post("/login", (req, res, next) => {
     }
     // Correct Details
     const token = signToken(user._id);
-    res.status(200).json({
-      status: 'success',
-      token
-    })
-    // return res.render("showuser", {status: 'success', user: user, token})  
+    // res.status(200).json({
+    //   status: 'success',
+    //   token
+    // })
+    return res.render("showuser", {status: 'success', user: user, token})  
   })
+})  
+
+// GET Login Page
+router.get("/admin", (req, res, next) => {
+  res.render('adminlogin')
 })
 
-// GET Forgot Password
-router.get('/forgot-password', (req, res, next) => {
-  res.render('forgot-password');
-});
-
-router.post('/forgot-password', (req, res, next) => {
-  res.send('Working');
-});
-
+// GET Login Page
+router.get("/cart", (req, res, next) => {
+  res.render('cart')
+})
 
 module.exports = router;

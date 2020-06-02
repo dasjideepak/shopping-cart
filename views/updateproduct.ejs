@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flipkart Clone</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="/images/f-logo.png " />
+    <link rel="stylesheet" href="icons/css/all.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="top-nav">
+        <div class="top-nav-container">
+          <div class="flex">
+            <div class="flipkart-logo">
+              <a href="#">
+                <img src="/images/f-logo.png" alt="logo">
+              </a>  
+            </div>
+            <div class="flex search-bar">
+              <input type="text" name="search" id="" placeholder="Search for products, brands and more">
+              <a href="">
+                <i class="fas fa-search"></i>
+              </a>
+            </div>  
+          </div>
+          <div class="top-nav-right">
+            <a class="flex topnav-signupbtn" href="/users/signup">
+              <i class="fas fa-user"></i>
+              <h5>Sign Up</h5>
+            </a>  
+            <a class="flex topnav-signupbtn" href="/users/login">
+              <i class="fas fa-user"></i>
+              <h5>Login</h5>
+            </a>  
+            <a class="flex" href="#">
+              <i class="fas fa-shopping-cart"></i>
+              <h5>Cart</h5>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="form-section">
+        <form class="form-container form-container1" action="/product/add" method="post">
+            <h1 class="form-heading">Add Product</h1>
+            <input type="text" name="name" placeholder="Enter Product Name">
+            <input type="file" name="images">
+            <input type="number" name="price" placeholder="Enter Price">
+            <textarea name="offers" cols="30" rows="10" placeholder="Enter Offers"></textarea>
+            <textarea name="highlight" cols="30" rows="10" placeholder="Product Description"></textarea>
+            <input type="text" name="warranty" placeholder="Warranty">
+            <button type="submit" class="login">Add Product</button>
+        </form>    
+    </main>
+</body>
+</html>

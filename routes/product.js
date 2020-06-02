@@ -14,4 +14,8 @@ router.post('/add', (req, res, next) => {
     res.send("Added");
 });
 
+router.get('/description', (req, res, next) => {
+    res.render("singleproduct");
+});
+
 module.exports = router;

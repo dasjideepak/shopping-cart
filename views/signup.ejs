@@ -1,26 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <section class="signup-section">
-        <div class="signup-form-container">
-            <div class="signup-left-sec">
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signup</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="icon" href="/images/f-logo.png " />
+        <link rel="stylesheet" href="/icons/css/all.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
+    </head>
+    <body>
+        <header>
+        <nav class="top-nav">
+            <div class="top-nav-container">
+            <div class="flex">
+                <div class="flipkart-logo">
+                <a href="#">
+                    <img src="/images/f-logo.png" alt="logo">
+                </a>  
+                </div>
+                <div class="flex search-bar">
+                <input type="text" name="search" id="" placeholder="Search for products, brands and more">
+                <a href="">
+                    <i class="fas fa-search"></i>
+                </a>
+                </div>  
             </div>
-            <div class="signup-right-sec">
-                <form action="/users/signup" method="POST" enctype="multipart/form-data">
-                    <input type="text" name="name" placeholder="Enter Name" required>
-                    <input type="email" name="email" placeholder="Enter Email" required>
-                    <input type="password" name="password" placeholder="Enter Password" required>
-                    <input type="file" name="avatar">
-                    <input type="submit" value="Sign Up">
-                </form>
+            <div class="top-nav-right">
+                <a class="flex topnav-signupbtn" href="/users/signup">
+                <i class="fas fa-user"></i>
+                <h5>Sign Up</h5>
+                </a>  
+                <a class="flex topnav-signupbtn" href="/users/login">
+                <i class="fas fa-user"></i>
+                <h5>Login</h5>
+                </a>  
+                <a class="flex" href="/users/cart">
+                    <i class="fas fa-shopping-cart"></i>
+                <h5>Cart</h5>
+                </a>
             </div>
-        </div>
-    </section>
-</body>
+            </div>
+        </nav>
+        </header> 
+        <main class="form-section">
+            <form action="/users/signup" method="POST" class="form-container" enctype="multipart/form-data">
+                <h1 class="form-heading">Create Your Account <span class="wave">😊</span></h1>
+                Name: <input type="text" name="name" placeholder="Enter Name" required>
+                Email: <input type="email" name="email" placeholder="Enter Email" required/>
+                Mobile Number: <input type="text" name="mobile" placeholder="Enter Mobile Number" required/>
+                Password:<input type="password" name="password" placeholder="Enter Password" required />
+                Profile Picture: <input type="file" name="avatar">
+                <button type="submit" class="login">Signup</button>
+                <a class="center" href="/users/login">Already have an account?</a>
+            </form>    
+        </main>
+    </body>
 </html>
