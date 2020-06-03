@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel="icon" href="/images/f-logo.png " />
+        <link rel="stylesheet" href="/icons/css/all.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
+    </head>
+    <body>
+        <header>
+            <nav class="top-nav">
+                <div class="top-nav-container">
+                <div class="flex">
+                    <div class="flipkart-logo">
+                    <a href="/">
+                        <img src="/images/f-logo.png" alt="logo">
+                    </a>  
+                    </div>
+                    <div class="flex search-bar">
+                    <input type="text" name="search" id="" placeholder="Search for products, brands and more">
+                    <a href="">
+                        <i class="fas fa-search"></i>
+                    </a>
+                    </div>  
+                </div>
+                <div class="top-nav-right">
+                    <% if(!user) { %>
+                        <a class="flex topnav-signupbtn" href="/users/signup">
+                            <i class="fas fa-user"></i>
+                            <h5>Sign Up</h5>
+                            </a>  
+                            <a class="flex topnav-signupbtn" href="/users/login">
+                            <i class="fas fa-user"></i>
+                            <h5>Login</h5>
+                        </a>          
+                    <% } %>
+                    <a class="flex relative" href="/users/cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <% if(user) { %>
+                            <h5 class="product-in-cart">0</h5>
+                        <% } %>   
+                    </a>
+                    <% if(user) { %>
+                        <div class="header-image">
+                            <a href="">
+                                <img src="<%= user.avatar %>" alt="<%= user.name %>">
+                            </a>
+                            <div class="onhover">                                      
+                                <h3><%= user.name %></h3>
+                            </div>
+                        </div>
+                        <div class="logout-link">
+                            <a href="/users/logout">Logout</a>    
+                        </div>
+                    <% } %>
+                </div>
+                </div>
+            </nav>
+        </header> 

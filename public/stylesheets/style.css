@@ -92,10 +92,6 @@ body {
   color: white;
 }
 
-.top-nav .fas {
-  font-size: 14px;
-}
-
 .top-nav h5 {
   font-size: 16px;
 }
@@ -254,25 +250,34 @@ textarea {
   text-decoration: underline;
 }
 
+.github-login a {
+  color: white;
+  text-decoration: none;
+}
+
+.github-login a:hover {
+  color: white;
+}
+
 .form-container a:hover {
   color: var(--dark-main-color);
 }
 
 .user-img {
   width: 180px;
-  height: 220px;
   border: 1px solid black;
 }
 
 .carousel {
   display: flex;
+  align-items: center;
+  justify-content: center;
   max-width: 1480px;
   margin: 8px auto;
 }
 
 .slider-img {
-  width: 50%;
-  padding: 0 16px;
+  padding: 0 8px;
   height: 240px;
 }
 
@@ -344,6 +349,10 @@ textarea {
 
 .show-img .fa-shopping-cart, .fa-store{
   padding: 0 12px 0 4px;
+}
+
+.fa-shopping-cart {
+  font-size: 32px;
 }
 
 .right-side-sec {
@@ -431,3 +440,129 @@ textarea {
 .shop-now-btn:hover {
   background-color: #2e09d4;
 }  
+
+
+/* error */
+
+.error-sec {
+  padding: 40px 8px;
+  background-color: rgb(192, 180, 204);
+}
+
+.error-sec h1, h2 {
+  text-align: center ;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: rgb(218, 22, 22);
+}
+
+.error-sec h1 {
+  font-size: 48px;
+}
+
+.error-sec h2 {
+  margin-top: 16px;
+  font-size: 28px;
+}
+
+.error-sec pre {
+  padding: 72px 64px;
+  font-size: 18px;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fa-github {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.header-image {
+  position: relative;
+}
+
+.header-image img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0 12px;
+}
+
+.onhover {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: rgb(59, 0, 0);
+  border-radius: 4px;
+  padding: 4px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.header-image img:hover ~ .onhover{
+  display: block;
+}
+
+.product-in-cart {
+  position: absolute;
+  right: 14px;
+  top: 6px;
+  color: red;
+  font-weight: 600;
+}
+
+.relative {
+  position: relative;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-link a {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.project-container {
+  padding: 8px;
+  flex-wrap: wrap;
+}
+
+.project-card  {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 40px;
+}
+
+.single-project-card {
+  padding: 8px;
+  border: 2px solid rgb(65, 37, 37);
+  text-align: center;
+}
+
+.single-project-card > * {
+  padding: 8px;
+}
+
+.single-project-card > img {
+  width: 100%;
+}
+
+.single-project-card h3 {
+  font-size: 28px;
+}
+
+.add-to-cart {
+  padding: 8px 32px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+}
+
+.index-heading {
+  font-size: 28px;
+  font-weight: 600;
+  padding: 24px 0;
+}

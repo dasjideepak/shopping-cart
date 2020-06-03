@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
-
-// Require Product Model
+var cloudinary = require('cloudinary');
+var upload = require('../handlers/multer');
 var Product = require("../models/product");
+var auth = require('../middlewares/auth');
 
 // GET Add Product
 router.get('/add', (req, res, next) => {
@@ -10,8 +11,16 @@ router.get('/add', (req, res, next) => {
 });
 
 // POST Add Product  
-router.post('/add', (req, res, next) => {
-    res.send("Added");
+router.post('/add', upload.single('images'), async (req, res, next) => {
+    try {
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
+        req.body.images = result.url;
+        var product = await Product.create(req.body);
+        res.redirect('/');
+    }
+    catch(error){
+        next(error);
+    }
 });
 
 router.get('/description', (req, res, next) => {

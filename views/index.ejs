@@ -1,49 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Flipkart Clone</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="icon" href="/images/f-logo.png " />
-  </head>
-  <body>  
-    <header>
-      <nav class="top-nav">
-        <div class="top-nav-container">
-          <div class="flex">
-            <div class="flipkart-logo">
-              <a href="#">
-                <img src="/images/f-logo.png" alt="logo">
-              </a>  
-            </div>
-            <div class="flex search-bar">
-              <input type="text" name="search" id="" placeholder="Search for products, brands and more">
-              <a href="">
-                <i class="fas fa-search"></i>
-              </a>
-            </div>  
-          </div>
-          <div class="top-nav-right">
-            <a class="flex topnav-signupbtn" href="/users/signup">
-              <i class="fas fa-user"></i>
-              <h5>Sign Up</h5>
-            </a>  
-            <a class="flex topnav-signupbtn" href="/users/login">
-              <i class="fas fa-user"></i>
-              <h5>Login</h5>
-            </a>  
-            <a class="flex" href="/users/cart">
-              <i class="fas fa-shopping-cart"></i>
-              <h5>Cart</h5>
-            </a>
-          </div>
+<%- include('partials/header') -%>
+<main>
+  <section class="project-container carousel">
+    <h1 class="index-heading">Welcome to Shopping Cart</h1>
+    <div class="project-card">  
+    <% if(allproduct.length > 0) { %>
+      <% allproduct.forEach(elem => { %>
+        <div class="single-project-card">
+          <h2><%= elem.name %></h2>
+          <img src="<%= elem.images %>" alt="<%= elem.name %>">
+          <h3>₹ <%= elem.price %></h3>
+          <h4><%= elem.description %></h4>    
+          <p><%= elem.warranty %></p>  
+          <a class="add-to-cart" href="">Add to Cart</a>
         </div>
-      </nav>
-    </header>
-    <main>
-     <div class="carousel">
-        <img class="slider-img" src="/images/slider1.jpg" alt="First slide">
-        <img class="slider-img" src="/images/slider2.jpg" alt="First slide">
-      </div>
-    </main>
-  </body>
-</html>
+      <% }) %>
+    <% } %> 
+    </div>
+  </section>
+
+</main>
+<%- include('partials/footer') -%>

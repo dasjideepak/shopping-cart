@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
 var cloudinary = require('cloudinary');
 var upload = require('../handlers/multer');
-var messagebird = require('messagebird')('');
+var nodemailer = require('nodemailer');
+var auth = require('../middlewares/auth');
 
 // Require User Model
 var User = require("../models/users");
@@ -13,17 +13,12 @@ router.get("/signup", (req, res, next) => {
   res.render('signup')
 })
 
-const signToken = id => {
-  return jwt.sign({ id }, "iamsecret")
-}
-
 // POST Sign Up Page
 router.post("/signup", upload.single('avatar'), async (req, res, next) => {
   try {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     req.body.avatar = result.url;
     const newUser = await User.create(req.body);
-    const token = signToken(newUser._id);
     res.status(201).render('login');
   } catch (error) {
     next(error)
@@ -36,39 +31,59 @@ router.get("/login", (req, res, next) => {
 })
 
 // POST Login Page
-router.post("/login", (req, res, next) => {
+router.post('/login', function(req, res, next) {
   var {email, password} = req.body;
-    User.findOne({email: email}, (err, user) => {
+  console.log(req.body)
+  User.findOne({email: email}, (err, user) => {
     if(err) return next(err);
-    
-    // Verify Email
-    if(!user) {
-      console.log("Wrong Email");
-      return next('Please Enter a Valid Mail');
-    }
-    // Verify Password
+    // verify email
+    if(!user) { 
+      console.log("Wrong Email")
+      return next('Please enter a valid email')
+    } 
+    // verify password here
     if(!user.verifyPassword(password)) {
-      console.log("Wrong Password");
-      return next('Please Enter a Valid Password')
+      console.log("Wrong Password")
+      res.send('Wrong Password')
+    };
+    console.log("Logged In")
+ 
+    req.session.userId = user.id;
+    req.session.user = user;
+    
+    if(user.isAdmin){
+      console.log("Welcome Admin")
+      return res.redirect('/admin');
     }
-    // Correct Details
-    const token = signToken(user._id);
-    // res.status(200).json({
-    //   status: 'success',
-    //   token
-    // })
-    return res.render("showuser", {status: 'success', user: user, token})  
-  })
-})  
+    else {
+      console.log("Welcome User")
+      return res.render("showuser", {user: user});
+    }
 
-// GET Login Page
+  }); 
+});
+
+// Logout
+router.get('/logout', (req, res, next) => {
+  req.session.destroy();
+  // delete req.session.userId;
+  res.clearCookie('connect.sid')
+  res.redirect('/')
+}) 
+
+// GET Admin Page
 router.get("/admin", (req, res, next) => {
   res.render('adminlogin')
 })
 
-// GET Login Page
+// GET Cart Page
 router.get("/cart", (req, res, next) => {
   res.render('cart')
+})
+
+// GET Forgot Password
+router.get("/forgot-password", (req, res, next) => {
+  res.render('forgot-password')
 })
 
 module.exports = router;

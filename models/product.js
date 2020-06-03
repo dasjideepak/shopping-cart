@@ -3,11 +3,10 @@ var Schema = mongoose.Schema;
 var slug = require("slug");
 
 var productSchema = new Schema({
-    name:{  type: String },
-    images: { type: Array },
+    name: { type: String },
+    images: { type: String },
     price: { type: Number },
-    offers: { type: Array },
-    description: []
+    description: { type: String },
 }, {timestamps: true});
 
 module.exports = mongoose.model('Product', productSchema);

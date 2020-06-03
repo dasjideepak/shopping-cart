@@ -1,58 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel='stylesheet' href='/stylesheets/style.css' />
-        <link rel="icon" href="/images/f-logo.png " />
-        <link rel="stylesheet" href="/icons/css/all.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
-    </head>
-    <body>
-        <header>
-        <nav class="top-nav">
-            <div class="top-nav-container">
-            <div class="flex">
-                <div class="flipkart-logo">
-                <a href="#">
-                    <img src="/images/f-logo.png" alt="logo">
-                </a>  
-                </div>
-                <div class="flex search-bar">
-                <input type="text" name="search" id="" placeholder="Search for products, brands and more">
-                <a href="">
-                    <i class="fas fa-search"></i>
-                </a>
-                </div>  
-            </div>
-            <div class="top-nav-right">
-                <a class="flex topnav-signupbtn" href="/users/signup">
-                <i class="fas fa-user"></i>
-                <h5>Sign Up</h5>
-                </a>  
-                <a class="flex topnav-signupbtn" href="/users/login">
-                <i class="fas fa-user"></i>
-                <h5>Login</h5>
-                </a>  
-                <a class="flex" href="/users/cart">
-                    <i class="fas fa-shopping-cart"></i>
-                <h5>Cart</h5>
-                </a>
-            </div>
-            </div>
-        </nav>
-        </header>   
-        <main class="cart-container">
-            <div class="empty-cart">
-                <h1 class="my-cart-title">My Cart</h1>
-                <div class="center">
-                    <img src="/images/emptycart.png" alt="">   
-                    <h3>Your Cart is Empty</h3>
-                    <h5>Add Item to it now.</h5>
-                    <button class="shop-now-btn"><a href="/">Shop Now</a></button>
-                </div>
-            </div>
-        </main>
-    </body>
-</html>
+<%- include('partials/header') -%>
+<main class="cart-container">
+    <div class="empty-cart">
+        <h1 class="my-cart-title">My Cart</h1>
+        <div class="center">
+            <img src="/images/emptycart.png" alt="">   
+            <h3>Your Cart is Empty</h3>
+            <h5>Add Item to it now.</h5>
+            <button class="shop-now-btn"><a href="/">Shop Now</a></button>
+        </div>
+    </div>
+</main>
+<%- include('partials/footer') -%>

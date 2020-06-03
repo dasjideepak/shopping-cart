@@ -4,12 +4,7 @@
     <h5>Email: <%= user.email%></h5>
     <h5>Mobile Number: <%= user.mobile%></h5>
     <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
-    <a href="">Update Profile</a>
-    <a href="">Change Password</a>
-    <a href="">Delete Profile</a>
-    <% if(user.isAdmin) { %>
     <a href="/product/add">Add New Product</a>
-<% } %>
-    <a href="/users/logout">Logout Profile</a>       
+     <a href="/users/logout">Logout Profile</a>       
 </main>
 <%- include('partials/footer') -%>

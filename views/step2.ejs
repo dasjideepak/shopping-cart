@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/users/step3" method="post">
-        <input type="hidden" name="id" value="<%= id %>">
-        <input type="text" name="token" required>
-        <input type="submit" value="Check Code">
-    </form>
-</body>
-</html>
+<%- include('partials/header') -%>
+<form action="/users/step3" method="post">
+    <input type="hidden" name="id" value="<%= id %>">
+    <input type="text" name="token" required>
+    <input type="submit" value="Check Code">
+</form>
+<%- include('partials/footer') -%>
