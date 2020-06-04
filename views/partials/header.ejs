@@ -45,8 +45,12 @@
                     </a>
                     <% if(user) { %>
                         <div class="header-image">
-                            <a href="">
-                                <img src="<%= user.avatar %>" alt="<%= user.name %>">
+                            <a href="/users/">
+                                <% if(user.avatar === undefined) { %>
+                                <img src="/images/user.png" alt="<%= user.name %>">
+                                <% } else { %>
+                                    <img src="<%= user.avatar %>" alt="<%= user.name %>">
+                                <% } %>    
                             </a>
                             <div class="onhover">                                      
                                 <h3><%= user.name %></h3>

@@ -1,9 +1,9 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var User = require('../models/users');
+var User = require("../models/users");
 
-router.get('/', (req, res, next) =>{
-    res.render('admin');
+router.get("/", (req, res, next) => {
+  res.render("admin");
 });
 
 module.exports = router;

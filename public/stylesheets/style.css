@@ -3,53 +3,136 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 /******************** My CSS ********************/
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -97,7 +180,7 @@ body {
 }
 
 .top-nav a:hover {
-  color: rgb(255, 238, 143); 
+  color: rgb(255, 238, 143);
 }
 
 .top-nav-container {
@@ -150,7 +233,8 @@ body {
   background-color: rgb(32, 115, 148);
 }
 
-.topnav-signupbtn i, .topnav-signupbtn h5 {
+.topnav-signupbtn i,
+.topnav-signupbtn h5 {
   color: var(--white);
   padding: 0 4px;
 }
@@ -170,13 +254,13 @@ body {
 
 @keyframes waving {
   0% {
-      transform: rotate(30deg);
+    transform: rotate(30deg);
   }
   50% {
-      transform: rotate(-15deg);
+    transform: rotate(-15deg);
   }
   100% {
-      transform: rotate( 30deg);
+    transform: rotate(30deg);
   }
 }
 
@@ -330,7 +414,9 @@ textarea {
   width: 100%;
 }
 
-.addto-cart-btn, .buy-now-btn, .shop-now-btn {
+.addto-cart-btn,
+.buy-now-btn,
+.shop-now-btn {
   background-color: #ff9f00;
   padding: 12px 18px;
   border: none;
@@ -347,7 +433,8 @@ textarea {
   background: #fb641b;
 }
 
-.show-img .fa-shopping-cart, .fa-store{
+.show-img .fa-shopping-cart,
+.fa-store {
   padding: 0 12px 0 4px;
 }
 
@@ -400,7 +487,7 @@ textarea {
   max-width: 1280px;
   margin: 0 auto;
   background-color: white;
-}  
+}
 
 .empty-cart img {
   width: 280px;
@@ -420,7 +507,7 @@ textarea {
   font-size: 18px;
   padding: 16px;
   color: black;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 600;
 }
 
@@ -439,8 +526,7 @@ textarea {
 
 .shop-now-btn:hover {
   background-color: #2e09d4;
-}  
-
+}
 
 /* error */
 
@@ -449,10 +535,12 @@ textarea {
   background-color: rgb(192, 180, 204);
 }
 
-.error-sec h1, h2 {
-  text-align: center ;
+.error-sec h1,
+h2 {
+  text-align: center;
   font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: rgb(218, 22, 22);
 }
 
@@ -469,7 +557,8 @@ textarea {
   padding: 72px 64px;
   font-size: 18px;
   line-height: 1.5;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .fa-github {
@@ -500,7 +589,7 @@ textarea {
   font-weight: 600;
 }
 
-.header-image img:hover ~ .onhover{
+.header-image a:hover ~ .onhover {
   display: block;
 }
 
@@ -530,7 +619,7 @@ textarea {
   flex-wrap: wrap;
 }
 
-.project-card  {
+.project-card {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 40px;

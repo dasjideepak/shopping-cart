@@ -8,6 +8,11 @@ var auth = require('../middlewares/auth');
 // Require User Model
 var User = require("../models/users");
 
+// GET Current Logged In User
+router.get("/", (req, res, next) => {
+  res.render('showuser')
+})
+
 // GET Sign Up Page
 router.get("/signup", (req, res, next) => {
   res.render('signup')
@@ -16,10 +21,12 @@ router.get("/signup", (req, res, next) => {
 // POST Sign Up Page
 router.post("/signup", upload.single('avatar'), async (req, res, next) => {
   try {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-    req.body.avatar = result.url;
+    // if(!req.file === undefined) {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      req.body.avatar = result.url;
+    // }  
     const newUser = await User.create(req.body);
-    res.status(201).render('login');
+    res.status(201).redirect('/users/login');
   } catch (error) {
     next(error)
   }
@@ -39,12 +46,12 @@ router.post('/login', function(req, res, next) {
     // verify email
     if(!user) { 
       console.log("Wrong Email")
-      return next('Please enter a valid email')
+      return res.send("Wrong Email")
     } 
     // verify password here
     if(!user.verifyPassword(password)) {
       console.log("Wrong Password")
-      res.send('Wrong Password')
+      return res.send('Wrong Password')
     };
     console.log("Logged In")
  
@@ -57,7 +64,7 @@ router.post('/login', function(req, res, next) {
     }
     else {
       console.log("Welcome User")
-      return res.render("showuser", {user: user});
+      return res.redirect("/users");
     }
 
   }); 
@@ -71,14 +78,58 @@ router.get('/logout', (req, res, next) => {
   res.redirect('/')
 }) 
 
+// Delete User
+router.get('/:id/delete', (req, res, next) => {
+  var id = req.params.id;
+  User.findByIdAndDelete(req.params.id, (err, user) => {
+    if(err) return next(err);
+    console.log('deleted');
+    res.redirect("/");
+  })
+});
+
+// GET User Edit
+router.get('/:id/edit', (req, res, next) => {
+  User.findById(req.params.id, (err, user) => {
+      if(err) return next(err);
+      res.render("edituser", { user: user })
+  });
+});
+
+// POST Edit User
+router.post('/:id/edit', upload.single('avatar'), async (req, res, next) => {
+  try {
+    if(!req.file === undefined) {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      req.body.avatar = result.url;  
+    }
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { runValidators: true }, (err, user) => {
+      return res.redirect("/users");
+    });    
+  } catch (error) {
+    next(error); 
+  }
+});
+
+// Display Cart Page
+router.get('/cart', auth.isLoggedin, async(req, res, next) =>{
+  var id = req.session.userId;  
+  try{
+    var loggedInUser = await User.findById(id).populate('shoppingCart.item');
+    var totalPrice = 0;
+    loggedInUser.shoppingCart.forEach((elem,index)=>{
+      totalPrice += elem.item.price*elem.quantity;
+    });
+    res.render('cart', {loggedInUser, totalPrice});
+  }
+  catch(error) {
+    return next(error);
+  }
+});
+
 // GET Admin Page
 router.get("/admin", (req, res, next) => {
   res.render('adminlogin')
-})
-
-// GET Cart Page
-router.get("/cart", (req, res, next) => {
-  res.render('cart')
 })
 
 // GET Forgot Password

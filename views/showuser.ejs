@@ -3,10 +3,14 @@
     <h5>Name: <%= user.name%></h5>
     <h5>Email: <%= user.email%></h5>
     <h5>Mobile Number: <%= user.mobile%></h5>
-    <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
-    <a href="">Update Profile</a>
+    <% if(user.avatar === undefined) { %>
+        <img class="user-img" src="/images/user.png" alt="<%= user.name %>">
+    <% } else { %>
+        <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
+    <% } %>    
+    <a href="/users/<%= user.id %>/edit"> Update Profile </a>
     <a href="">Change Password</a>
-    <a href="">Delete Profile</a>
+    <a class="del-btn" href="/users/<%= user.id %>/delete">Delete</a>        
     <% if(user.isAdmin) { %>
     <a href="/product/add">Add New Product</a>
 <% } %>

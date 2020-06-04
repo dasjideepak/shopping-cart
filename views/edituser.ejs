@@ -1,0 +1,19 @@
+<%- include('partials/header') -%>
+<main>
+    <form action="/users/<%= user.id%>/edit" method="POST" enctype="multipart/form-data">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<%= user.name%>">
+        <label for="email">Email</label>
+        <input type="email" name="email" value="<%= user.email%>">
+        <label for="name">Mobile</label>
+        <input type="tel" name="mobile" value="<%= user.mobile%>">
+        <% if(user.avatar === undefined) { %>
+            <img class="user-img" src="/images/user.png" alt="<%= user.name %>">
+        <% } else { %>
+            <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
+        <% } %>    
+        <input type="file" name="avatar" value="<%= user.avatar%>">
+        <input type="submit" value="Submit">
+    </form>    
+</main>
+<%- include('partials/footer') -%>

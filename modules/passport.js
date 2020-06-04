@@ -8,8 +8,9 @@ passport.use(
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
       callbackURL: "/auth/github/callback",
-    }, (accessToken, refreshToken, profile, done) => {
-    console.log(profile)
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log(profile);
       let newUser = {
         username: profile.username,
         email: profile._json.email,
@@ -19,13 +20,13 @@ passport.use(
         admin: profile.admin,
       };
 
-      console.log('User Created.')
+      console.log("User Created.");
 
       if (newUser.email === "dasjideepak@gmail.com") {
         // done(null, newUser);
 
         User.findOne({ email: newUser.email }, (err, user) => {
-          console.log('user found');
+          console.log("user found");
           if (!user) {
             User.create(
               {
@@ -39,14 +40,14 @@ passport.use(
               },
               (err, admin) => {
                 done(null, admin);
-                console.log('user from passport created.')
+                console.log("user from passport created.");
               }
             );
           } else done(null, user);
         });
       } else {
         done(null, false);
-        console.log('user already created.');
+        console.log("user already created.");
       }
     }
   )
@@ -54,7 +55,7 @@ passport.use(
 
 // Serialize.
 passport.serializeUser((user, done) => {
-  console.log("serialize")
+  console.log("serialize");
   done(null, user._id);
 });
 
