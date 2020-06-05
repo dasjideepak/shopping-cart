@@ -9,7 +9,7 @@ var User = require("../models/users");
 router.get("/", function (req, res, next) {
   Product.find({}, (err, allproduct) => {
     if (err) console.log(err);
-    res.render("index", { allproduct: allproduct });
+    res.render("index", { allproduct: allproduct,  messages: req.flash('info')});
   });
 });
 

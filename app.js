@@ -8,12 +8,11 @@ var mongoose = require("mongoose");
 require("dotenv").config();
 var multer = require("multer");
 var nodemailer = require("nodemailer");
-var cloudinary = require("cloudinary");
 var session = require("express-session");
+var flash = require("connect-flash");
 var mongoStore = require("connect-mongo")(session);
-var auth = require("./middlewares/auth");
-
-// Require Handlers
+var cloudinary = require("cloudinary");
+var auth = require('./middlewares/auth');
 require("./handlers/cloudinary");
 
 // Connect to DB
@@ -42,8 +41,8 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser());
 
 app.use(
   session({
@@ -54,14 +53,19 @@ app.use(
   })
 );
 
+app.use(flash());
+const flashMsg = require("./middlewares/flash"); 
+app.use(flashMsg.flashMsg);
+
 const loggedSession = require("./middlewares/auth");
 app.use(loggedSession.loggedSession);
 
 // Use Routers
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/product", productRouter);
-app.use("/admin", adminRouter);
+app.use('/admin',  auth.isAdminUser, adminRouter);
+app.use("/product", auth.isAdminUser, productRouter);
+
 
 // Catch 404 And Forward To Error Handler
 app.use(function (req, res, next) {

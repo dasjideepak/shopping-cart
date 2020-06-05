@@ -1,4 +1,18 @@
 <%- include('partials/header') -%>
+<div class="flashes">
+    <script type="text/javascript">window.setTimeout("document.querySelector('.flashes').style.display='none';", 5000); </script>
+    <% if (alerts.error) { %>
+        <% alerts.error.forEach(function(msg) { %>
+        <div class="alert alert-error "><%= msg %></div>
+        <% }); %>
+    <% } %>
+    <% if (alerts.success) { %>
+        <% alerts.success.forEach(function(msg) { %>
+        <div class="alert alert-success"><%= msg %></div>
+        <% }); %>
+    <% } %>
+</div>    
+
 <form action="/users/step2" method="post">
     <input type="tel" name="mobilenumber" placeholder="Enter Your Mobile Number" required>
     <input type="submit" value="Send Code">

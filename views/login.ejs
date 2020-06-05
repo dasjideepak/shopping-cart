@@ -1,18 +1,35 @@
 <%- include('partials/header') -%>
-<main class="form-section">
-    <form action="/users/login" method="POST" class="form-container">
-        <h1 class="form-heading">Welcome Back! <span class="wave">👋🏾</span></h1>
-        Email: <input type="email" name="email" placeholder="Enter Email" required/>
-        Password:<input type="password" name="password" placeholder="Enter Password" required />
-        <button type="submit" class="login">Login</button>
-        <button class="login github-login">
-            <a href="/auth/github">
-                <i class="fab fa-github"></i>
-                Login With Github
-            </a>
-        </button>
-        <a class="center" href="/users/forgot-password">Forgot Password?</a>
-        <a class="center" href="/users/signup">Create an Account</a>
-    </form>       
+<main>
+    <div class="container">
+        <section class="form-section">
+            <div class="flashes">
+                <script type="text/javascript">window.setTimeout("document.querySelector('.flashes').style.display='none';", 5000); </script>
+                <% if (alerts.error) { %>
+                    <% alerts.error.forEach(function(msg) { %>
+                      <div class="alert alert-error "><%= msg %></div>
+                    <% }); %>
+                  <% } %>
+                  <% if (alerts.success) { %>
+                    <% alerts.success.forEach(function(msg) { %>
+                      <div class="alert alert-success"><%= msg %></div>
+                    <% }); %>
+                  <% } %>
+            </div>    
+            <form action="/users/login" method="POST" class="form-container">
+                <h1 class="form-heading">Welcome Back! <span class="wave">👋🏾</span></h1>
+                Email: <input type="email" name="email" placeholder="Enter Email" required/>
+                Password:<input type="password" name="password" placeholder="Enter Password" required />
+                <button type="submit" class="login">Login</button>
+                <button class="login github-login">
+                    <a href="/auth/github">
+                        <i class="fab fa-github"></i>
+                        Login With Github
+                    </a>
+                </button>
+                <a class="center" href="/users/forgot-password">Forgot Password?</a>
+                <a class="center" href="/users/signup">Create an Account</a>
+            </form>       
+        </section>
+    </div>    
 </main>
 <%- include('partials/footer') -%>

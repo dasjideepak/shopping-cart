@@ -16,14 +16,11 @@ router.post("/add", upload.single("images"), async (req, res, next) => {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
     req.body.images = result.url;
     var product = await Product.create(req.body);
-    res.redirect("/");
+    req.flash('success', "Product Added")
+    res.redirect("/admin");
   } catch (error) {
     next(error);
   }
-});
-
-router.get("/description", (req, res, next) => {
-  res.render("singleproduct");
 });
 
 module.exports = router;

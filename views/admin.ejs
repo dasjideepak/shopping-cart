@@ -1,10 +1,48 @@
 <%- include('partials/header') -%>
 <main>
-    <h5>Name: <%= user.name%></h5>
-    <h5>Email: <%= user.email%></h5>
-    <h5>Mobile Number: <%= user.mobile%></h5>
-    <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
-    <a href="/product/add">Add New Product</a>
-     <a href="/users/logout">Logout Profile</a>       
+    <section class="container">
+        <div class="flashes">
+            <script type="text/javascript">window.setTimeout("document.querySelector('.flashes').style.display='none';", 5000); </script>
+            <% if (alerts.error) { %>
+                <% alerts.error.forEach(function(msg) { %>
+                <div class="alert alert-error "><%= msg %></div>
+                <% }); %>
+            <% } %>
+            <% if (alerts.success) { %>
+                <% alerts.success.forEach(function(msg) { %>
+                <div class="alert alert-success"><%= msg %></div>
+                <% }); %>
+            <% } %>
+        </div>    
+        <div>
+            <h1>Welcome Admin</h1>
+            <h5>Name: <%= user.name%></h5>
+            <h5>Email: <%= user.email%></h5>
+            <h5>Mobile Number: <%= user.mobile%></h5>
+            <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
+            <a href="/product/add">Add New Product</a>
+            <a href="/users/logout">Logout</a>       
+            <% if(product.length > 0) { %>
+            <div class="admin-table">
+                <table id="customers">
+                    <tr>
+                        <th>Project Category</th>
+                        <th>Name</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                <% product.forEach(elem => { %>
+                    <tr>
+                        <td>Electronics</td>
+                        <td><%= elem.name %></td>
+                        <td><a href="/admin/product/<%= elem.id %>/edit">Edit</a></td>
+                        <td><a href="/admin/product/<%= elem.id %>/delete">Delete</a></td>
+                    </tr>
+                <% }) %>
+            </table>        
+            <% } %> 
+            </div>    
+        </div>
+    </section>
 </main>
 <%- include('partials/footer') -%>

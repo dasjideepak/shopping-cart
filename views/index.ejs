@@ -1,43 +1,33 @@
 <%- include('partials/header') -%>
 <main>
-  <section class="project-container carousel">
-    <h1 class="index-heading">Welcome to Shopping Cart</h1>
-    <div class="project-card">  
-    <% if(allproduct.length > 0) { %>
-      <% allproduct.forEach(elem => { %>
-        <div class="single-project-card">
-          <h2><%= elem.name %></h2>
-          <img src="<%= elem.images %>" alt="<%= elem.name %>">
-          <h3>₹ <%= elem.price %></h3>
-          <h4><%= elem.description %></h4>    
-          <p><%= elem.warranty %></p>  
-          <a class="add-to-cart" href="">Add to Cart</a>
-        </div>
-      <% }) %>
-    <% } %> 
-    </div>
-  </section>
-
-</main>
-<%- include('partials/header') -%>
+  <div class="flashes">
+    <script type="text/javascript">window.setTimeout("document.querySelector('.flashes').style.display='none';", 5000); </script>
+    <% if (alerts.error) { %>
+        <% alerts.error.forEach(function(msg) { %>
+        <div class="alert alert-error "><%= msg %></div>
+        <% }); %>
+    <% } %>
+    <% if (alerts.success) { %>
+        <% alerts.success.forEach(function(msg) { %>
+        <div class="alert alert-success"><%= msg %></div>
+        <% }); %>
+    <% } %>
+  </div>    
 <% if(allproduct.length > 0) { %>
   <% allproduct.forEach(elem => { %>
-<main>
+    <p><%= elem.category %></p>
   <div class="product-container">
     <div class="left-side-sec">
-      <div class="img-nav">
-        <img src="/images/oneplus.jpeg" alt="">
-        <img src="/images/oneplus2.jpeg" alt="">
-        <img src="/images/oneplus3.jpeg" alt="">
-      </div>
       <div class="show-img">
         <div class="product-img">
-          <img src="/images/oneplus3.jpeg" alt="">
+          <img src="<%= elem.images %>" alt="<%= elem.name %>">
         </div>
         <div class="product-btn">
-          <button class="addto-cart-btn">
-            <i class="fas fa-shopping-cart"></i>Add to Cart
-          </button>
+
+          <form action="/users/<%= elem.id %>/cart/add" method="post">
+            <button type="submit" addto-cart-btn"><i class="fas fa-shopping-cart shopping-cart-small"></i>Add to Cart</button>
+          </form>
+
           <button class="buy-now-btn">
             <i class="fas fa-store"></i>Buy Now
           </button>
@@ -47,12 +37,6 @@
     <div class="right-side-sec">
       <h1 class="product-title"><%= elem.name %></h1>
       <h2 class="product-price">₹ <%= elem.price %></h1>
-      <ul CLASS="offers">
-        <h3 class="bold">Available Offers</h3>
-        <li><i class="fas fa-tag"></i> Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card</li>
-        <li><i class="fas fa-tag"></i>Bank Offer 10% Unlimited Cashback on SBI Credit Card</li><li><i class="fas fa-tag"></i>No cost EMI ₹3,040/month. Standard EMI also availableView Plans</li>
-      </ul>
-      <h4 class="warranty"><span class="bold">Warranty:</span><%= elem.warranty %></h4>
       <h4>
         <span class="bold">Description:</span><%= elem.description %>
       </h4>
@@ -61,5 +45,4 @@
   <% }) %>
 <% } %> 
 </main>
-<%- include('partials/footer') -%>
 <%- include('partials/footer') -%>

@@ -9,7 +9,6 @@ var userSchema = new Schema(
     mobile: { type: Number, required: true },
     avatar: { type: String },
     password: { type: String, minlength: 4, maxlength: 15 },
-    shoppingCart: [{ type: Schema.Types.ObjectId, ref: "Cart" }],
     resetLink: { data: String, default: "" },
     isAdmin: {
       type: Boolean,

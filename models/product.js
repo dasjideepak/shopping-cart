@@ -7,6 +7,7 @@ var productSchema = new Schema(
     images: { type: String },
     price: { type: Number },
     description: { type: String },
+    category: {type: String}
   },
   { timestamps: true }
 );

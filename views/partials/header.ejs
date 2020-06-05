@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
         <link rel='stylesheet' href='/stylesheets/style.css' />
+        <link rel='stylesheet' href='/javascripts/main.css' />
         <link rel="icon" href="/images/f-logo.png " />
         <link rel="stylesheet" href="/icons/css/all.css" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" />
@@ -37,23 +38,33 @@
                             <h5>Login</h5>
                         </a>          
                     <% } %>
-                    <a class="flex relative" href="/users/cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        <% if(user) { %>
-                            <h5 class="product-in-cart">0</h5>
+                    <% if(user) { %>
+                        <% if(!user.isAdmin) { %>
+                            <a class="flex relative" href="/users/cart">
+                                <i class="fas fa-shopping-cart"></i>        
+                                <h5 class="product-in-cart">0</h5>
+                            </a>
                         <% } %>   
-                    </a>
+                    <% } %>    
                     <% if(user) { %>
                         <div class="header-image">
-                            <a href="/users/">
-                                <% if(user.avatar === undefined) { %>
-                                <img src="/images/user.png" alt="<%= user.name %>">
-                                <% } else { %>
-                                    <img src="<%= user.avatar %>" alt="<%= user.name %>">
-                                <% } %>    
-                            </a>
+                            <% if(user.isAdmin) { %>
+                               <a href="/admin/">
+                            <% } else { %>
+                                <a href="/users">        
+                            <% } %>        
+                                    <% if(user.avatar === undefined) { %>
+                                        <img src="/images/user.png" alt="<%= user.name %>">
+                                    <% } else { %>
+                                        <img src="<%= user.avatar %>" alt="<%= user.name %>">
+                                    <% } %>    
+                                </a>        
                             <div class="onhover">                                      
-                                <h3><%= user.name %></h3>
+                                <% if(!user.isAdmin) { %>
+                                    <h3><%= user.name %></h3>
+                                <% } else { %> 
+                                    <h3>Admin</h3>
+                                <% } %>    
                             </div>
                         </div>
                         <div class="logout-link">

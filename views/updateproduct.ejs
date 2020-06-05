@@ -1,13 +1,25 @@
 <%- include('partials/header') -%>
 <main class="form-section">
-  <form class="form-container form-container1" action="/product/add" method="post">
-    <h1 class="form-heading">Add Product</h1>
-    <input type="text" name="name" placeholder="Enter Product Name">
+  <div class="flashes">
+    <script type="text/javascript">window.setTimeout("document.querySelector('.flashes').style.display='none';", 5000); </script>
+    <% if (alerts.error) { %>
+        <% alerts.error.forEach(function(msg) { %>
+        <div class="alert alert-error "><%= msg %></div>
+        <% }); %>
+    <% } %>
+    <% if (alerts.success) { %>
+        <% alerts.success.forEach(function(msg) { %>
+        <div class="alert alert-success"><%= msg %></div>
+        <% }); %>
+    <% } %>
+</div>    
+
+  <form class="form-container form-container1" action="/admin/product/<%= product.id %>/edit" method="post" enctype="multipart/form-data">
+    <h1 class="form-heading">Update Product</h1>
+    <input type="text" name="name" value="<%= product.name %>">
+    <input type="number" name="price" value="<%= product.price %>">
+    <textarea name="description" cols="30" rows="10"><%= product.description %></textarea>
     <input type="file" name="images">
-    <input type="number" name="price" placeholder="Enter Price">
-    <textarea name="offers" cols="30" rows="10" placeholder="Enter Offers"></textarea>
-    <textarea name="highlight" cols="30" rows="10" placeholder="Product Description"></textarea>
-    <input type="text" name="warranty" placeholder="Warranty">
     <button type="submit" class="login">Add Product</button>
   </form>    
 </main>
