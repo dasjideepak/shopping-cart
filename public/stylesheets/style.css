@@ -156,7 +156,24 @@ table {
 img {
   width: 100%;
 }
-
+/* h1 {
+  font-size: 44px;
+}
+h2 {
+  font-size: 40px;
+}
+h3 {
+  font-size: 46px;
+}
+h4 {
+  font-size: 32px;
+}
+h5 {
+  font-size: 28px;
+}
+h5 {
+  font-size: 24px;
+} */
 a {
   text-decoration: none;
 }
@@ -687,28 +704,25 @@ h2 {
 .flashes {
   width: 100%;
   margin: 12px 0;
-  font-size: 14px;
 }
 
 .alert {
+  color: #ffffff;
   padding: .75rem 1.25rem;
+  font-size: 16px;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: .25rem;
+  transition: all 0.25s ease-in-out;
 }
 
 .alert-success {
-  color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
-  background: rgb(40, 126, 0);
-  transition: all 0.25s ease-in-out;
+  background: rgb(29, 92, 0);
 }
 
 .alert-error{
-  color: #721c24;
   background-color: #f8d7da;
-  border-color: #f5c6cb; 
-  transition: all 0.25s ease-in-out;
+  border-color: #75030e; 
 }
-

@@ -1,0 +1,51 @@
+<%- include('partials/header') -%>
+<main>
+  <section class="container">
+    <div class="flashes">
+      <script type="text/javascript">
+        window.setTimeout(
+          "document.querySelector('.flashes').style.display='none';",
+          4000
+        );
+      </script>
+      <% if (alerts.error) { %> <% alerts.error.forEach(function(msg) { %>
+      <div class="alert alert-error"><%= msg %></div>
+      <% }); %> <% } %> <% if (alerts.success) { %> <%
+      alerts.success.forEach(function(msg) { %>
+      <div class="alert alert-success"><%= msg %></div>
+      <% }); %> <% } %>
+    </div>
+    <div>
+      <h4><a href="/product/add">Add New Product</a></h4>
+      <h4><a href="/admin/users">All User</a></h4>
+      <% if(!allUser.length > 0) { %>
+      <h1>No User Found</h1>
+      <% } %> <% if(allUser.length > 0) { %>
+      <div class="admin-table">
+        <h1 class="center">List of Users</h1>
+        <table id="customers">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Block/UnBlock</th>
+          </tr>
+          <% allUser.forEach(elem => { %>
+          <tr>
+            <td><%= elem.name %></td>
+            <td><%= elem.email %></td>
+            <td><%= elem.mobile %></td>
+            <% if(!elem.isBlocked) { %>
+                <td><a href="/admin/user/<%= elem.id %>/block">Block</a></td>
+            <% } else { %>
+                <td><a href="/admin/user/<%= elem.id %>/unblock">UnBlock</a></td>
+            <% } %> 
+          </tr>
+          <% }) %>
+        </table>
+        <% } %>
+      </div>
+    </div>
+  </section>
+</main>
+<%- include('partials/footer') -%>

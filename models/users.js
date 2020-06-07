@@ -10,10 +10,10 @@ var userSchema = new Schema(
     avatar: { type: String },
     password: { type: String, minlength: 4, maxlength: 15 },
     resetLink: { data: String, default: "" },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
+    isBlocked: { type: Boolean, default: false },
+    isVerifiedUser: { type: Boolean, default: false },
+    verificationToken: { type: String },
+    isAdmin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

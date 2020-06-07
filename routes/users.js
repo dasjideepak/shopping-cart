@@ -22,15 +22,79 @@ router.get("/signup", (req, res, next) => {
 
 // POST Sign Up Page
 router.post("/signup", upload.single("avatar"), async (req, res, next) => {
-  try {
-    if (!req.file === undefined) {
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      req.body.avatar = result.url;
+  let {email} = req.body;
+  try {    
+    var user = await User.findOne({email},'-password');
+    
+    if(user) {
+        req.flash('error', 'Email already registered');
+        res.redirect('/users/signup');
     }
-    const newUser = await User.create(req.body);
-    res.status(201).redirect("/users/login");
+        
+    if (!user) {
+
+      if (!req.file === undefined) {
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
+        req.body.avatar = result.url;
+      }
+  
+      var randomNumber = Math.floor((Math.random() * 100) + 54);
+      req.body.verificationToken = randomNumber;
+      var newUser = await User.create(req.body);
+    
+      var transporter = await nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.USER_EMAIL,
+          pass: process.env.EMAIL_PASSWORD,
+        },
+      });
+
+      var sendEmailTo = newUser.email
+
+      var mailOptions = {
+        from: "technicaldassharma@gmail.com",
+        to: sendEmailTo,
+        subject: "Email Verification",
+        html:`Welcome,
+              Verification Link - http://localhost:3000/users/${newUser.id}/activate/${randomNumber}`
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log("An Error Occurred", error);
+        } else {
+          console.log("Email Sent");
+        }
+      });
+    }  
+
+    req.flash('success', 'Registered successfully. Please Check Your Email');
+    return res.redirect('/users/login');
   } catch (error) {
     next(error);
+  }
+});
+
+// Account Verification
+router.get('/:id/activate/:code', async(req, res, next) =>{
+  let id = req.params.id;
+  let code = req.params.code;
+  try{
+    var user = await User.findById(id);
+    if(user.verificationToken == code) {
+      user = await User.findByIdAndUpdate(id, {isVerifiedUser: true});
+      user = await User.findByIdAndUpdate(id, {$unset: {verificationToken: 1}});
+      req.flash('success', 'Activated successfully. Please Login')
+      res.redirect('/users/login');
+    }
+    else{
+      req.flash('error', 'Invalid Link')
+      res.redirect('/users/signup');
+    }
+  }
+  catch(error) {
+    return next(error);
   }
 });
 
@@ -40,32 +104,45 @@ router.get("/login", (req, res, next) => {
 });
 
 // POST Login Page
-router.post("/login", function (req, res, next) {
+router.post("/login", async (req, res, next) => {
   var { email, password } = req.body;
-  User.findOne({ email: email }, (err, user) => {
-    if (err) return next(err);
-    // verify email
-    if (!user) {
-      req.flash('error', 'Wrong Email');
-      return res.redirect("/users/login");
-    }
-    // verify password here
-    if (!user.verifyPassword(password)) {
-      req.flash('error', 'Wrong Password');
-      return res.redirect("/users/login");
-    }
-    req.session.userId = user.id;
-    req.session.user = user;
-
-    if (user.isAdmin) {
-      req.flash('success', "Welcome Admin")
-      return res.redirect("/admin");
-    } else {
-      req.flash("success", "Login Successfull")
-      return res.redirect("/users");
-    }
-  });
-});
+  try {
+    var user = await User.findOne({ email })
+  
+      if (!user) {
+        req.flash('error', 'Wrong Email');
+        return res.redirect("/users/login");
+        console.log("Checking Mail")
+      }
+      if (!user.verifyPassword(password)) {
+        req.flash('error', 'Wrong Password');
+        return res.redirect("/users/login");
+        console.log("Checking Password")
+      }
+      if(user.isBlocked)  {
+        req.flash('error', 'User blocked. Please contact support');
+        return res.redirect('/users/login');
+        console.log("Checking isBlocked")
+      }
+      if(!user.isVerifiedUser)  {
+        req.flash('error', 'Please check email for activation link.');
+        return res.redirect('/users/login');
+      }
+  
+      req.session.userId = user.id;
+      req.session.user = user;
+  
+      if (user.isAdmin) {
+        req.flash('success', "Welcome Admin")
+        return res.redirect("/admin");
+      } else {
+        req.flash("success", "Login Successfull, Welcome, " +user.name)
+        return res.redirect("/users");
+      }
+  } catch (error) {
+    next(error)    
+  }
+})
 
 // Logout
 router.get("/logout", auth.isLoggedin, (req, res, next) => {

@@ -6,12 +6,26 @@ var Product = require("../models/product");
 var User = require("../models/users");
 
 // GET Home Page
-router.get("/", function (req, res, next) {
-  Product.find({}, (err, allproduct) => {
-    if (err) console.log(err);
-    res.render("index", { allproduct: allproduct,  messages: req.flash('info')});
-  });
+router.get("/", async (req, res, next) => {
+  try {
+    var allproduct = await Product.find({})
+    return res.render("index", { allproduct: allproduct,  messages: req.flash('info')});      
+  } catch (error) {
+    return next(error)
+  }
 });
+
+router.get("/products/:category", async (req, res, next) => {
+  try {
+    let {category} = req.params
+    console.log(req.params.category)
+    var allproduct = await Product.find({category: req.params.category})
+    return res.render("index", { allproduct: allproduct,  messages: req.flash('info')});            
+  } catch (error) {
+    return next(error)
+  }
+});
+
 
 // Handle request.
 router.get("/auth/github", passport.authenticate("github"));

@@ -23,7 +23,6 @@
         <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
     <% } %>    
     <a href="/users/<%= user.id %>/edit"> Update Profile </a>
-    <a href="">Change Password</a>
     <a class="del-btn" href="/users/<%= user.id %>/delete">Delete</a>        
     <% if(user.isAdmin) { %>
     <a href="/product/add">Add New Product</a>

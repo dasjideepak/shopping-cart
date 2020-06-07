@@ -14,8 +14,16 @@
     <% } %>
   </div>    
 <% if(allproduct.length > 0) { %>
+  <div class="cetegory-bar">
+    <h3 class="bold">Select Categoy</h3>
+    <ul>
+      <li class="bold"><a href="/">All Products</a></li>
+    <% allproduct.forEach(el => { %>      
+      <li class="bold"><a href="/products/<%= el.category %>"><%= el.category %></a></li>
+    <% }) %>
+    </ul>
+  </div>
   <% allproduct.forEach(elem => { %>
-    <p><%= elem.category %></p>
   <div class="product-container">
     <div class="left-side-sec">
       <div class="show-img">
@@ -40,6 +48,7 @@
       <h4>
         <span class="bold">Description:</span><%= elem.description %>
       </h4>
+      <h6><span class="bold">Categoy: </span><%= elem.category %></h6>
     </div>
   </div>  
   <% }) %>
