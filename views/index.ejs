@@ -13,6 +13,7 @@
         <% }); %>
     <% } %>
   </div>    
+ 
 <% if(allproduct.length > 0) { %>
   <div class="cetegory-bar">
     <h3 class="bold">Select Categoy</h3>
@@ -33,7 +34,7 @@
         <div class="product-btn">
 
           <form action="/users/<%= elem.id %>/cart/add" method="post">
-            <button type="submit" addto-cart-btn"><i class="fas fa-shopping-cart shopping-cart-small"></i>Add to Cart</button>
+            <button type="submit" class="addto-cart-btn"><i class="fas fa-shopping-cart shopping-cart-small"></i>Add to Cart</button>
           </form>
 
           <button class="buy-now-btn">
@@ -52,6 +53,8 @@
     </div>
   </div>  
   <% }) %>
-<% } %> 
+<% } else { %> 
+  <h1 class="not-found-warning">No Product Find</h1>
+<% } %>
 </main>
 <%- include('partials/footer') -%>

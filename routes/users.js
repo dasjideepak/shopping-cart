@@ -22,26 +22,25 @@ router.get("/signup", (req, res, next) => {
 
 // POST Sign Up Page
 router.post("/signup", upload.single("avatar"), async (req, res, next) => {
-  let {email} = req.body;
-  try {    
-    var user = await User.findOne({email},'-password');
-    
-    if(user) {
-        req.flash('error', 'Email already registered');
-        res.redirect('/users/signup');
-    }
-        
-    if (!user) {
+  let { email } = req.body;
+  try {
+    var user = await User.findOne({ email }, "-password");
 
-      if (!req.file === undefined) {
+    if (user) {
+      req.flash("error", "Email already registered");
+      res.redirect("/users/signup");
+    }
+
+    if (!user) {
+      if (req.file) {
         const result = await cloudinary.v2.uploader.upload(req.file.path);
         req.body.avatar = result.url;
       }
-  
-      var randomNumber = Math.floor((Math.random() * 100) + 54);
+
+      var randomNumber = Math.floor(Math.random() * 100 + 54);
       req.body.verificationToken = randomNumber;
       var newUser = await User.create(req.body);
-    
+
       var transporter = await nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -50,14 +49,14 @@ router.post("/signup", upload.single("avatar"), async (req, res, next) => {
         },
       });
 
-      var sendEmailTo = newUser.email
+      var sendEmailTo = newUser.email;
 
       var mailOptions = {
         from: "technicaldassharma@gmail.com",
         to: sendEmailTo,
         subject: "Email Verification",
-        html:`Welcome,
-              Verification Link - http://localhost:3000/users/${newUser.id}/activate/${randomNumber}`
+        html: `Welcome,
+              Verification Link - http://localhost:3000/users/${newUser.id}/activate/${randomNumber}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -67,33 +66,33 @@ router.post("/signup", upload.single("avatar"), async (req, res, next) => {
           console.log("Email Sent");
         }
       });
-    }  
+    }
 
-    req.flash('success', 'Registered successfully. Please Check Your Email');
-    return res.redirect('/users/login');
+    req.flash("success", "Registered successfully. Please Check Your Email");
+    return res.redirect("/users/login");
   } catch (error) {
     next(error);
   }
 });
 
 // Account Verification
-router.get('/:id/activate/:code', async(req, res, next) =>{
+router.get("/:id/activate/:code", async (req, res, next) => {
   let id = req.params.id;
   let code = req.params.code;
-  try{
+  try {
     var user = await User.findById(id);
-    if(user.verificationToken == code) {
-      user = await User.findByIdAndUpdate(id, {isVerifiedUser: true});
-      user = await User.findByIdAndUpdate(id, {$unset: {verificationToken: 1}});
-      req.flash('success', 'Activated successfully. Please Login')
-      res.redirect('/users/login');
+    if (user.verificationToken == code) {
+      user = await User.findByIdAndUpdate(id, { isVerifiedUser: true });
+      user = await User.findByIdAndUpdate(id, {
+        $unset: { verificationToken: 1 },
+      });
+      req.flash("success", "Activated successfully. Please Login");
+      res.redirect("/users/login");
+    } else {
+      req.flash("error", "Invalid Link");
+      res.redirect("/users/signup");
     }
-    else{
-      req.flash('error', 'Invalid Link')
-      res.redirect('/users/signup');
-    }
-  }
-  catch(error) {
+  } catch (error) {
     return next(error);
   }
 });
@@ -107,42 +106,42 @@ router.get("/login", (req, res, next) => {
 router.post("/login", async (req, res, next) => {
   var { email, password } = req.body;
   try {
-    var user = await User.findOne({ email })
-  
-      if (!user) {
-        req.flash('error', 'Wrong Email');
-        return res.redirect("/users/login");
-        console.log("Checking Mail")
-      }
-      if (!user.verifyPassword(password)) {
-        req.flash('error', 'Wrong Password');
-        return res.redirect("/users/login");
-        console.log("Checking Password")
-      }
-      if(user.isBlocked)  {
-        req.flash('error', 'User blocked. Please contact support');
-        return res.redirect('/users/login');
-        console.log("Checking isBlocked")
-      }
-      if(!user.isVerifiedUser)  {
-        req.flash('error', 'Please check email for activation link.');
-        return res.redirect('/users/login');
-      }
-  
-      req.session.userId = user.id;
-      req.session.user = user;
-  
-      if (user.isAdmin) {
-        req.flash('success', "Welcome Admin")
-        return res.redirect("/admin");
-      } else {
-        req.flash("success", "Login Successfull, Welcome, " +user.name)
-        return res.redirect("/users");
-      }
+    var user = await User.findOne({ email });
+
+    if (!user) {
+      req.flash("error", "Wrong Email");
+      return res.redirect("/users/login");
+      console.log("Checking Mail");
+    }
+    if (!user.verifyPassword(password)) {
+      req.flash("error", "Wrong Password");
+      return res.redirect("/users/login");
+      console.log("Checking Password");
+    }
+    if (user.isBlocked) {
+      req.flash("error", "User blocked. Please contact support");
+      return res.redirect("/users/login");
+      console.log("Checking isBlocked");
+    }
+    if (!user.isVerifiedUser) {
+      req.flash("error", "Please check email for activation link.");
+      return res.redirect("/users/login");
+    }
+
+    req.session.userId = user.id;
+    req.session.user = user;
+
+    if (user.isAdmin) {
+      req.flash("success", "Welcome Admin");
+      return res.redirect("/admin");
+    } else {
+      req.flash("success", "Login Successfull, Welcome, " + user.name);
+      return res.redirect("/users");
+    }
   } catch (error) {
-    next(error)    
+    next(error);
   }
-})
+});
 
 // Logout
 router.get("/logout", auth.isLoggedin, (req, res, next) => {
@@ -156,7 +155,7 @@ router.get("/:id/delete", auth.isLoggedin, (req, res, next) => {
   var id = req.params.id;
   User.findByIdAndDelete(req.params.id, (err, user) => {
     if (err) return next(err);
-    req.flash('success', "User Deleted")
+    req.flash("success", "User Deleted");
     res.redirect("/");
   });
 });
@@ -176,7 +175,7 @@ router.post(
   upload.single("avatar"),
   async (req, res, next) => {
     try {
-      if (!req.file === undefined) {
+      if (req.file) {
         const result = await cloudinary.v2.uploader.upload(req.file.path);
         req.body.avatar = result.url;
       }
@@ -185,7 +184,7 @@ router.post(
         req.body,
         { runValidators: true },
         (err, user) => {
-          req.flash('success', "User Updated Successfully")
+          req.flash("success", "User Updated Successfully");
           return res.redirect("/users");
         }
       );
@@ -198,17 +197,35 @@ router.post(
 // Display Cart Page
 router.get("/cart", auth.isLoggedin, async (req, res, next) => {
   try {
-    var cart = await Cart.findOne({ userId: req.user.id }).populate({path: "items", populate: { path: "productId"}});
-    if(cart) {
-      console.log(cart.items.length)
+    var cart = await Cart.findOne({ userId: req.user.id }).populate({
+      path: "items",
+      populate: { path: "productId" },
+    });
+    
+    if (cart) {
+      console.log(cart.items.length);
     }
-    res.render("cart", { cart });
+
+    cart.items.forEach(elem => {
+      if(elem.quantity <= 0) {
+        var remove = Item.findByIdAndDelete(elem.id)
+        console.log(remove, "Removing Item");
+      }
+      console.log(elem.id, "Element" );
+    })  
+
+    var totalAmount = 0;
+    cart.items.forEach((elem, index) => {
+      totalAmount += elem.productId.price * elem.quantity;
+    });
+
+    res.render("cart", { cart, totalAmount});
   } catch (error) {
     next(error);
   }
 });
 
-// Add to cart.
+// Add Item to cart.
 router.post("/:id/cart/add", auth.isLoggedin, async (req, res, next) => {
   try {
     var productId = req.params.id;
@@ -223,18 +240,17 @@ router.post("/:id/cart/add", auth.isLoggedin, async (req, res, next) => {
       var itemToCreate = await Item.create({ productId });
       await Cart.create({ userId, items: itemToCreate.id });
     } else {
-      
       // Search item in cart
       var isItemInCart = cartToFind.items.find(
         (item) => item.productId == productId
       );
-      
+
       // If item is already in cart
       if (isItemInCart) {
         await Item.findByIdAndUpdate(isItemInCart._id, {
           $inc: { quantity: 1 },
         });
-      
+
         // If item is not in cart then update
       } else {
         var itemToCreate = await Item.create({ productId });
@@ -243,25 +259,81 @@ router.post("/:id/cart/add", auth.isLoggedin, async (req, res, next) => {
         });
       }
     }
-    req.flash('success', "Item Added to Cart")
+    req.flash("success", "Item Added to Cart");
     res.redirect("/users/cart");
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/:id/cart/delete", auth.isLoggedin, async (req, res, next) => {
+// Delete Item from Cart
+router.get("/item/:id/delete", auth.isLoggedin, async (req, res, next) => {
   try {
-    req.flash('success', "Item Deleted from Cart")
+    var id = req.params.id;
+
+    var item = await Item.findByIdAndDelete(id);
+   
+    req.flash("success", "Item Deleted from Cart");
     res.redirect("/users/cart");
+
   } catch (error) {
     next(error);
   }
 });
+
+// Cart Item Quantity Increase
+router.get("/item/:id/increase", auth.isLoggedin, async (req, res, next) => {
+  try {
+    var id = req.params.id;
+    await Item.findByIdAndUpdate(id, {$inc: { quantity: 1 }});
+   
+    req.flash("success", "Item Quantity Updated");
+    res.redirect("/users/cart");
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Cart Item Quantity Decrease
+router.get("/item/:id/decrease", auth.isLoggedin, async (req, res, next) => {
+  try {
+    var id = req.params.id;
+    await Item.findByIdAndUpdate(id, {$inc: { quantity: -1 }});
+   
+    req.flash("success", "Item Quantity Updated");
+    res.redirect("/users/cart");
+
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST Cart Item Quantity
+router.post("/item/:id/update", auth.isLoggedin, async (req, res, next) => {
+  try {
+    var id = req.params.id;
+    var value = req.body.quantity;
+    console.log(id, value)
+    await Item.findByIdAndUpdate(id, { quantity: value});
+   
+    req.flash("success", "Item Quantity Updated");
+    res.redirect("/users/cart");
+
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 // GET Forgot Password
 router.get("/forgot-password", (req, res, next) => {
   res.render("forgot-password");
+});
+
+// GET Checkout Page
+router.get("/cart/checkout", auth.isLoggedin, (req, res, next) => {
+  res.render("checkout");
 });
 
 module.exports = router;

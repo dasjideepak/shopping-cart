@@ -236,8 +236,9 @@ body {
 
 .fa-search {
   position: absolute;
-  top: 14px;
-  right: 8px;
+  font-size: 18px;
+  top: 12px;
+  right: 20px;
   color: black;
 }
 
@@ -325,7 +326,7 @@ body {
   border-top: 10px solid var(--accent-color);
 }
 
-.form-container input {
+.form-container input, select {
   width: 280px;
   padding: 12px 12px;
   border-radius: 0px;
@@ -404,7 +405,6 @@ textarea {
 }
 
 .left-side-sec {
-  display: flex;
   border: 1px solid rgb(224, 222, 222);
 }
 
@@ -425,10 +425,6 @@ textarea {
 }
 
 .show-img {
-  width: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-left: 1px solid rgb(216, 214, 214);
   border-left: 1px solid rgb(216, 214, 214);
   padding: 8px;
@@ -452,7 +448,6 @@ textarea {
   color: white;
   font-size: 16px;
   text-transform: uppercase;
-  width: 50%;
   margin: 0 2px;
 }
 
@@ -498,11 +493,25 @@ textarea {
 
 /* Cart */
 
+.cart > * {
+  padding: 16px 0;
+}
+
+.item-price {
+  padding: 12px 0;
+}
+
 .cart-container {
   max-width: 1280px;
-  margin: 0 auto;
+  padding: 20px;
+  margin: 40px auto;
   background-color: white;
 }
+
+.cart-container h1 {
+  font-size: 20px;
+}
+
 
 .empty-cart img {
   width: 280px;
@@ -725,4 +734,78 @@ h2 {
 .alert-error{
   background-color: #f8d7da;
   border-color: #75030e; 
+}
+
+.checkout-btn {
+  padding: 8px 16px;
+  border: none;
+  outline: none;
+  background-color: tomato;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: rgb(247, 60, 27);
+  color: white;
+}
+
+.single-cart-item {
+  border: 1px solid rgb(167, 9, 9);
+  padding: 16px;
+  margin: 8px 0;
+} 
+
+.single-cart-item input {
+  width: 80px;
+  padding: 4px 8px;
+  margin: 0 8px;
+}
+
+.remove-item {
+  margin-left: 40px;
+}
+
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.img-width {
+  width: 280px;
+}
+
+.remove-item:hover {
+  font-weight: 600;
+}
+
+.fa-plus, .fa-minus {
+  margin: 0 8px;
+}
+
+.fa-plus:hover, .fa-minus:hover {
+  color: blue;
+}
+
+.product-img img {
+  width: 340px;
+}
+
+.search-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.not-found-warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 360px;
+  font-size: 40px;
+  font-weight: 800;
+  color: brown;
 }

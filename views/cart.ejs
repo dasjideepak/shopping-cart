@@ -15,7 +15,7 @@
                     <% }); %>
                 <% } %>
             </div>    
-            <% if(!cart) { %>
+            <% if(cart.items.length == 0) { %>
                 <div class="empty-cart">
                     <h1 class="my-cart-title">My Cart</h1>
                     <div class="center">
@@ -26,13 +26,25 @@
                     </div>
                 </div>    
             <% } else { %> 
-                <% cart.items.forEach(el => { %>
-                    <h1>Name<%= el.productId.name %></h1>
-                    <h1>Price<%= el.productId.price %></h1>
-                    <a href="">--</a><input type="text" name="quantity" id="" value="<%= el.quantity %>">
-                    <a href="">++</a>
-                    <a href="<%= el.id %>/cart/delete">Remove From Cart</a>
+                <div class="cart">
+                    <h1 class="my-cart-title center">My Cart</h1>
+                    <% cart.items.forEach(el => { %>
+                            <form class="single-cart-item" action="/users/item/<%= el.id %>/update" method="POST">
+                                <h1><%= el.productId.name %></h1>
+                                <h1 class="item-price">Amount - <%= el.productId.price * el.quantity %> </h1>
+                                <span>Quantity</span>
+                                <a href="/users/item/<%= el.id %>/decrease"><i class="fas fa-minus"></i></a>
+                                <input type="text" name="quantity" id="" value="<%= el.quantity %>">
+                                <a href="/users/item/<%= el.id %>/increase"><i class="fas fa-plus"></i></a>
+                                <a class="remove-item" href="/users/item/<%= el.id %>/delete">Remove</a>
+                                <input type="submit" value="Update">
+                            </form>    
                     <% }) %>
+                    <h4>Total Amount - <%= totalAmount %></h4>
+                    <a href="/users/cart/checkout">
+                        <button class="checkout-btn">Checkout</button>
+                    </a>
+                </div>
             <% } %>    
         </div>
     </section>

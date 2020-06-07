@@ -45,7 +45,7 @@ router.post(
   upload.single("images"),
   async (req, res, next) => {
     try {
-      if (!req.file === undefined) {
+      if (req.file) {
         const result = await cloudinary.v2.uploader.upload(req.file.path);
         req.body.images = result.url;
       }

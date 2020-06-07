@@ -15,6 +15,19 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/search", async (req, res, next) => {
+  try {
+    console.log(req.body.search);
+
+    var allproduct = await Product.find({category: req.body.search})
+    console.log(allproduct);
+    
+    return res.render("index", {allproduct});      
+  } catch (error) {
+    return next(error)
+  }
+});
+
 router.get("/products/:category", async (req, res, next) => {
   try {
     let {category} = req.params

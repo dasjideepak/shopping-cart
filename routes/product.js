@@ -12,9 +12,11 @@ router.get("/add", (req, res, next) => {
 
 // POST Add Product
 router.post("/add", upload.single("images"), async (req, res, next) => {
-  try {
-    const result = await cloudinary.v2.uploader.upload(req.file.path);
-    req.body.images = result.url;
+  try { 
+    if(req.file) {
+      const result = await cloudinary.v2.uploader.upload(req.file.path);
+      req.body.images = result.url;
+    }  
     var product = await Product.create(req.body);
     req.flash('success', "Product Added")
     res.redirect("/admin");

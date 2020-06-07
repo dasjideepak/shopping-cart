@@ -15,11 +15,16 @@
             <% } %>
         </div>    
         <div>
-            <h1>Welcome Admin</h1>
+            <h1 class="title">Welcome Admin</h1>
             <h5>Name: <%= user.name%></h5>
             <h5>Email: <%= user.email%></h5>
             <h5>Mobile Number: <%= user.mobile%></h5>
-            <h5>Avatar: <img class="user-img" src="<%= user.avatar%>" alt="<%= user.name%>"></h5>
+            <% if(user.avatar === undefined) { %>
+                <img class="img-width" src="/images/user.png" alt="<%= user.name %>">
+            <% } else { %>
+                <img class="img-width" src="<%= user.avatar %>" alt="<%= user.name %>">
+            <% } %>    
+
             <h3><a href="/product/add">Add New Product</a></h3>
             <h3><a href="/admin/users">All User</a></h3>
             <% if(product.length > 0) { %>
